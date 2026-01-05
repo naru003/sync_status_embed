@@ -12,12 +12,7 @@ static const int led_pins[] = {12, 13, 14, 15};
 static const int pin_size = sizeof(led_pins) / sizeof(led_pins[0]);
 static const int validate_led_state = 1 << pin_size;
 
-int led_state = 0;
-
-unsigned long last_measure_time = 0;
-unsigned long interval = 1000;
-
-void set_led_state() {
+void set_led_state(int led_state) {
   for (int i = 0; i < pin_size; i++) {
     digitalWrite(led_pins[i], bitRead(led_state, i));
   }
@@ -57,8 +52,9 @@ void setup(void) {
 
   server.on(UriRegex("^\\/actions\\/([0-9]+)$"), []() {
     String str = server.pathArg(0);
-    if(str.toInt() < validate_led_state){
-      led_state = str.toInt();
+    int led_state = str.toInt();
+    if(led_state < validate_led_state){
+      set_led_state(led_state);
       server.send(200, "text/plain", "success!");
     } else {
       server.send(400, "text/plain", "This operation is out of scope.");
@@ -74,8 +70,4 @@ void loop(void) {
   server.handleClient();
   unsigned long current_time = millis();
   MDNS.update();
-  if ((current_time - last_measure_time) >= interval) {
-    set_led_state();
-    last_measure_time = current_time;
-  }
 }

@@ -67,17 +67,17 @@ curl http://syncStatusServer.local/actions/15
    1. <https://github.com/esp8266/Arduino>を参照
 2. ボード選択後、「ツール」を開き以下設定値を変更
 
-  |       項目       |         設定値         |
-  | ---------------- | ---------------------- |
+  |       項目        |         設定値         |
+  | ----------------- | ---------------------- |
   | Crystal Frequency | 26 MHz                 |
-  | Flash Size       | 2MB(FS:1MB OTA:~512KB) |
-  | Flash Frequency  | 80 MHz                 |
-  | Flash Mode       | QIO(fast)              |
-  | CPU Frequency    | 160 MHz                |
+  | Flash Size        | 2MB(FS:1MB OTA:~512KB) |
+  | Flash Frequency   | 80 MHz                 |
+  | Flash Mode        | QIO(fast)              |
+  | CPU Frequency     | 160 MHz                |
 
 ### 2. WiFi設定
 
-`secrets.h.local`を`secrets.h`にリネームorコピーして`SSID`, `passPhrase`を自身の環境に合わせて設定
+`secrets.h.local`を`secrets.h`にリネームorコピーして`STASSID`, `STAPSK`を自身の環境に合わせて設定
 
 ### 3. アップロード
 
