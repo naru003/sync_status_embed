@@ -69,7 +69,7 @@ curl http://syncStatusServer.local/actions/15
 
   |       項目       |         設定値         |
   | ---------------- | ---------------------- |
-  | Crytal Frequency | 26 MHz                 |
+  | Crystal Frequency | 26 MHz                 |
   | Flash Size       | 2MB(FS:1MB OTA:~512KB) |
   | Flash Frequency  | 80 MHz                 |
   | Flash Mode       | QIO(fast)              |
