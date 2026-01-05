@@ -8,7 +8,7 @@
 
 #define HOSTNAME "syncStatusServer"
 
-static const int led_pins[] = {12, 13, 14, 15};
+static const int led_pins[] = {15, 14, 13, 12};
 static const int pin_size = sizeof(led_pins) / sizeof(led_pins[0]);
 static const int validate_led_state = 1 << pin_size;
 
@@ -59,7 +59,7 @@ void setup(void) {
     } else {
       server.send(400, "text/plain", "This operation is out of scope.");
     }
-    Serial.println(led_state);
+    // Serial.println(led_state);
   });
 
   server.begin();
