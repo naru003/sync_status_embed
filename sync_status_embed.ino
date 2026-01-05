@@ -10,12 +10,12 @@
 
 static const int led_pins[] = {12, 13, 14, 15};
 static const int pin_size = sizeof(led_pins) / sizeof(led_pins[0]);
-static const int validate_action = 1 << pin_size;
+static const int validate_led_state = 1 << pin_size;
 
 int led_state = 0;
 
-unsigned long LastMeasureTime = 0;
-unsigned long Interval = 1000;
+unsigned long last_measure_time = 0;
+unsigned long interval = 1000;
 
 void set_led_state() {
   for (int i = 0; i < pin_size; i++) {
@@ -72,10 +72,10 @@ void setup(void) {
 
 void loop(void) {
   server.handleClient();
-  unsigned long CurrentTime = millis();
+  unsigned long current_time = millis();
   MDNS.update();
-  if ((CurrentTime - LastMeasureTime) >= Interval) {
+  if ((current_time - last_measure_time) >= interval) {
     set_led_state();
-    LastMeasureTime = CurrentTime;
+    last_measure_time = current_time;
   }
 }
