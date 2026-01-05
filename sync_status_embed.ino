@@ -10,7 +10,7 @@
 
 static const int led_pins[] = {12, 13, 14, 15};
 static const int pin_size = sizeof(led_pins) / sizeof(led_pins[0]);
-static const int validate_action = (int) pow(2.0, pin_size);
+static const int validate_action = 1 << pin_size;
 
 int action = 0;
 
