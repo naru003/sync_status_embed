@@ -68,6 +68,5 @@ void setup(void) {
 
 void loop(void) {
   server.handleClient();
-  unsigned long current_time = millis();
   MDNS.update();
 }
