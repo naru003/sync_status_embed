@@ -10,16 +10,16 @@
 
 static const int led_pins[] = {12, 13, 14, 15};
 static const int pin_size = sizeof(led_pins) / sizeof(led_pins[0]);
-static const int validate_action = (int) pow(2.0, pin_size);
+static const int validate_led_state = 1 << pin_size;
 
-int action = 0;
+int led_state = 0;
 
 unsigned long LastMeasureTime = 0;
 unsigned long Interval = 1000;
 
-void display_binary() {
+void set_led_state() {
   for (int i = 0; i < pin_size; i++) {
-    digitalWrite(led_pins[i], bitRead(action, i));
+    digitalWrite(led_pins[i], bitRead(led_state, i));
   }
 }
 
@@ -57,13 +57,13 @@ void setup(void) {
 
   server.on(UriRegex("^\\/actions\\/([0-9]+)$"), []() {
     String str = server.pathArg(0);
-    if(str.toInt() < validate_action){
-      action = str.toInt();
+    if(str.toInt() < validate_led_state){
+      led_state = str.toInt();
       server.send(200, "text/plain", "success!");
     } else {
       server.send(400, "text/plain", "This operation is out of scope.");
     }
-    Serial.println(action);
+    Serial.println(led_state);
   });
 
   server.begin();
@@ -75,7 +75,7 @@ void loop(void) {
   unsigned long CurrentTime = millis();
   MDNS.update();
   if ((CurrentTime - LastMeasureTime) >= Interval) {
-    display_binary();
+    set_led_state();
     LastMeasureTime = CurrentTime;
   }
 }
