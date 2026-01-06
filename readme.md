@@ -66,7 +66,7 @@ curl http://syncStatusServer.local/state/15
   - LED4: GPIO 13
 - **回路図**:
 
-<img width="586" height="643" alt="image" src="https://github.com/naru003/sync_status_embed/blob/feature/add_embed/images/diagram.png" />
+![回路図](/images/diagram.png "diagram")
 
 ## セットアップ
 
