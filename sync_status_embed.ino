@@ -12,7 +12,9 @@ static const int led_pins[] = {15, 14, 13, 12};
 static const int pin_size = sizeof(led_pins) / sizeof(led_pins[0]);
 static const int validate_led_state = 1 << pin_size;
 
-void set_led_state(int led_state) {
+int led_state = 0;
+
+void set_led_state() {
   for (int i = 0; i < pin_size; i++) {
     digitalWrite(led_pins[i], bitRead(led_state, i));
   }
@@ -50,11 +52,15 @@ void setup(void) {
     server.send(200, "text/plain", HOSTNAME);
   });
 
-  server.on(UriRegex("^\\/actions\\/([0-9]+)$"), []() {
+  server.on(F("/state"), []() {
+    server.send(200, "text/plain", String(led_state));
+  });
+
+  server.on(UriRegex("^\\/state\\/([0-9]+)$"), []() {
     String str = server.pathArg(0);
-    int led_state = str.toInt();
-    if(led_state < validate_led_state){
-      set_led_state(led_state);
+    if(str.toInt() < validate_led_state){
+      led_state = str.toInt();
+      set_led_state();
       server.send(200, "text/plain", "success!");
     } else {
       server.send(400, "text/plain", "This operation is out of scope.");
