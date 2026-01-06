@@ -20,15 +20,20 @@ ESP8266を使用したWebサーバーベースの同期ステータス表示シ�
 
 #### `GET /`
 
-- **説明**: サーバーの生存確認
-- **レスポンス**: `syncStatusServer`
+- **説明**: サーバーの生存確認（Hostnameを返す）
+- **レスポンス例**: `syncStatusServer`
 
-#### `GET /actions/{number}`
+#### `GET /state`
+
+- **説明**: 現在のstateを返却
+- **レスポンス例**: `1`
+
+#### `GET /state/{number}`
 
 - **説明**: LEDの状態を設定（0-15の数値をバイナリ表示）
 - **パラメータ**:
   - `number`: 0-15の整数値
-- **レスポンス**:
+- **レスポンス例**:
   - 成功時: `success!`
   - 16以上を指定した場合: `This operation is out of scope.` (HTTP 400)
 
@@ -36,28 +41,31 @@ ESP8266を使用したWebサーバーベースの同期ステータス表示シ�
 
 ```bash
 # LEDを全て消灯 (0000)
-curl http://syncStatusServer.local/actions/0
+curl http://syncStatusServer.local/state/0
 
 # LED1のみ点灯 (0001)
-curl http://syncStatusServer.local/actions/1
+curl http://syncStatusServer.local/state/1
 
 # LED2のみ点灯 (0010)
-curl http://syncStatusServer.local/actions/2
+curl http://syncStatusServer.local/state/2
 
 # 全て点灯 (1111)
-curl http://syncStatusServer.local/actions/15
+curl http://syncStatusServer.local/state/15
 ```
 
 ## ハードウェア構成
 
-- **マイコン**: ESP8266
+- **マイコン**: ESP-WROOM-02(ESP8266)
+  - 実装には開発ボードである[ESPr® Developer](https://ssci.to/2500)を使用
 - **LED**: 4個
+- **抵抗(330Ω~2kΩ)**: 4個
 - **接続ピン**:
   - LED1: GPIO 12
   - LED2: GPIO 13
   - LED3: GPIO 14
   - LED4: GPIO 15
 - **回路図**:
+  
 
 ## セットアップ
 
