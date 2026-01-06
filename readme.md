@@ -60,12 +60,13 @@ curl http://syncStatusServer.local/state/15
 - **LED**: 4個
 - **抵抗(330Ω~2kΩ)**: 4個
 - **接続ピン**:
-  - LED1: GPIO 12
-  - LED2: GPIO 13
-  - LED3: GPIO 14
-  - LED4: GPIO 15
+  - LED1: GPIO 14
+  - LED2: GPIO 15
+  - LED3: GPIO 12
+  - LED4: GPIO 13
 - **回路図**:
-  
+
+<img width="586" height="643" alt="image" src="https://github.com/naru003/sync_status_embed/blob/feature/add_embed/images/diagram.png" />
 
 ## セットアップ
 
