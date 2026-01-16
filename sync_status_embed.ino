@@ -56,7 +56,7 @@ void setup(void) {
     server.send(200, "text/plain", String(led_state));
   });
 
-  server.on(UriRegex("^\\/state\\/([0-9]+)$"), []() {
+  server.on(UriRegex("^\\/state\\/([0-9]+)$"), HTTP_PUT, []() {
     String str = server.pathArg(0);
     if(str.toInt() < validate_led_state){
       led_state = str.toInt();
