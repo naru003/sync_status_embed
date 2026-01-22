@@ -1,4 +1,5 @@
 #include <U8g2lib.h>
+#include <EEPROM.h>
 #include "serverClient.h"
 #include "display.h"
 #include "constants.h"
@@ -10,13 +11,13 @@ unsigned long timer100ms = 0;
 int8_t ledState = 0;
 
 Label labels[LabelOffset::LENGTH] = {
-  {"会議中", LabelOffset::X[0], LabelOffset::Y[0]},
-  {"腹減った", LabelOffset::X[1], LabelOffset::Y[0]},
-  {"疲れた", LabelOffset::X[0], LabelOffset::Y[1]},
-  {"休憩中", LabelOffset::X[1], LabelOffset::Y[1]}
+  {LabelOffset::X[0], LabelOffset::Y[0]},
+  {LabelOffset::X[1], LabelOffset::Y[0]},
+  {LabelOffset::X[0], LabelOffset::Y[1]},
+  {LabelOffset::X[1], LabelOffset::Y[1]}
 };
 
-ServerClient serverClient(&ledState);
+ServerClient serverClient(&ledState, labels);
 Display display;
 
 void handle100ms() {
@@ -28,6 +29,11 @@ void handle100ms() {
 }
 
 void setup(void) {
+  EEPROM.begin(512);
+  for(int8_t i=0; i<LabelOffset::LENGTH; i++) {
+    String defaultText = "ラベル" + String(i+1);
+    labels[i].begin(defaultText.c_str());
+  }
   Serial.begin(115200);
   serverClient.setup();
   display.setup();

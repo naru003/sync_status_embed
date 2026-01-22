@@ -18,13 +18,6 @@ class Label {
     return addr;
   }
 
-  void begin(const char* defaultText) {
-    load();
-    if (!isValid()) {
-      setText(defaultText);
-    }
-  }
-
   void load() {
     for (uint8_t i = 0; i < TEXT_LEN; i++) {
       text[i] = EEPROM.read(eepromAddr + i);
@@ -40,23 +33,26 @@ class Label {
       }
       if (text[i] == '\0') break;
     }
+    EEPROM.commit();
   }
 
   bool isValid() const {
     if (text[0] == '\0') return false;
-
-    // EEPROM未初期化(0xFF)対策
-    for (uint8_t i = 0; i < TEXT_LEN; i++) {
-      if (text[i] != (char)0xFF) return true;
-    }
-    return false;
+    if (text[0] == (char)0xFF) return false;
+    return true;
   }
 
 public:
-  Label(const char* defaultText, int16_t x_, int16_t y_)
+  Label(int16_t x_, int16_t y_)
     : x(x_), y(y_), eepromAddr(allocateAddr()) {
     text[0] = '\0';
-    begin(defaultText);
+  }
+
+  void begin(const char* defaultText) {
+    load();
+    if (!isValid()) {
+      setText(defaultText);
+    }
   }
 
   const char* getText() const {
