@@ -5,6 +5,8 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 #include <uri/UriRegex.h>
+#include <UrlEncode.h>
+#include "label.h"
 #include "constants.h"
 #include "secrets.h"
 
@@ -14,11 +16,44 @@ ESP8266WebServer server(80);
 class ServerClient {
 
   int8_t* ledStatePointer;
+  Label* labelsPointer;
   static const int validateLedState = 1 << LabelOffset::LENGTH;
 
+  int utf8Length(const String& s) {
+    int count = 0;
+    for (uint16_t i = 0; i < s.length(); i++) {
+      // UTF-8 の先頭バイト判定
+      if ((s[i] & 0xC0) != 0x80) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  String validateArgs(ESP8266WebServer& server) {
+    if (server.args() != 4) return "invalid args length";
+
+    for (uint8_t i = 0; i < server.args(); i++) {
+      String key = server.argName(i);
+      String value = server.arg(i);
+
+      if (key.length() != 1 || key[0] < '0' || key[0] > '3') {
+        return "invalid key: " + key;
+      }
+
+      if (utf8Length(value) > 5) {
+        return "value too long: " + value;
+      }
+    }
+
+    return "";
+  }
+
+
   public:
-    ServerClient(int8_t* ledState)
-      : ledStatePointer(ledState)
+    ServerClient(int8_t* ledState, Label* labels)
+      : ledStatePointer(ledState),
+        labelsPointer(labels)
     {}
 
     void setup() {
@@ -60,11 +95,24 @@ class ServerClient {
         }
       });
 
-      server.on(F("/labels"), HTTP_PUT, []() {
-        Serial.print("labels args: ");
-        Serial.println(server.args());
-        for (uint8_t i = 0; i < server.args(); i++) { Serial.println(server.argName(i) + ": " + server.arg(i)); }
-        if(server.args() == 0) Serial.println(server.arg("plain"));
+      server.on(F("/labels"), HTTP_GET, [this]() {
+        String response;
+        for(uint8_t i = 0; i < LabelOffset::LENGTH; i++) {
+          response += String(i) + "=" + urlEncode(labelsPointer[i].getText());
+        }
+        server.send(200, "application/x-www-form-urlencoded", response);
+      });
+
+      server.on(F("/labels"), HTTP_PUT, [this]() {
+        String message = validateArgs(server);
+        if(message != "") {
+          server.send(400, "text/plain", message);
+          return;
+        }
+
+        for (uint8_t i = 0; i < server.args(); i++) {
+          labelsPointer[server.argName(i).toInt()].setText(server.arg(i).c_str());
+        }
         server.send(200, "text/plain", "success!");
       });
 
