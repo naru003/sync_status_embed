@@ -18,24 +18,21 @@ ESP8266を使用したWebサーバーベースのステータス表示システ�
 
 ### エンドポイント
 
-#### `GET /`
+詳細なAPI仕様については、[documents/openapi.yaml](documents/openapi.yaml)を参照してください。
 
-- **説明**: サーバーの生存確認（Hostnameを返す）
-- **レスポンス例**: `syncStatusServer`
+#### ローカルでSwagger UIを表示する方法
 
-#### `GET /state`
-
-- **説明**: 現在のstateを返却
-- **レスポンス例**: `1`
-
-#### `PUT /state/{number}`
-
-- **説明**: LEDの状態を設定（0-15の数値をバイナリ表示）
-- **パラメータ**:
-  - `number`: 0-15の整数値
-- **レスポンス例**:
-  - 成功時: `success!`
-  - 16以上を指定した場合: `This operation is out of scope.` (HTTP 400)
+1. VS Codeの拡張機能「Swagger Viewer」をインストール
+   - 拡張機能IDから検索: `Arjun.swagger-viewer`
+2. VS Codeの設定で「Preview In Browser」を有効化
+   - 設定（`Ctrl+,`）を開く
+   - `swagger viewer`で検索
+   - 「Preview In Browser」にチェックを入れる
+3. Swagger UIでプレビュー
+   - `documents/swagger.yaml`を開く
+   - コマンドパレット（`Ctrl+Shift+P`）を開く
+   - `Preview Swagger`を選択
+   - ブラウザでSwagger UIが表示されます
 
 ### 使用例
 

@@ -1,0 +1,158 @@
+openapi: 3.0.0
+info:
+  title: Sync Status API
+  description: ESP8266デバイス上の同期ステータスLED状態とラベルを制御するAPI
+  version: 1.0.0
+servers:
+  - url: http://syncStatusServer.local
+    description: mDNSホスト名
+  - url: http://{ipAddress}
+    description: 直接IPアクセス
+    variables:
+      ipAddress:
+        default: 192.168.1.100
+        description: ESP8266デバイスのIPアドレス
+
+paths:
+  /:
+    get:
+      summary: ホスト名取得
+      description: デバイスのホスト名を返します
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: syncStatusServer
+
+  /state:
+    get:
+      summary: 現在のLED状態取得
+      description: 現在のLED状態値を返します
+      responses:
+        '200':
+          description: Current LED state
+          content:
+            text/plain:
+              schema:
+                type: integer
+                description: 現在のLED状態値
+                example: 5
+
+  /state/{value}:
+    put:
+      summary: LED状態設定
+      description: LED状態を指定された値に設定します（16未満である必要があります）
+      parameters:
+        - name: value
+          in: path
+          required: true
+          description: 設定するLED状態値
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 15
+      responses:
+        '200':
+          description: 正常系
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: success!
+        '400':
+          description: 無効な状態値（範囲外）
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: This operation is out of scope.
+
+  /labels:
+    get:
+      summary: 全ラベル取得
+      description: すべてのラベル（0-3）をURLエンコード形式で返します
+      responses:
+        '200':
+          description: すべてのラベル
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  '0':
+                    type: string
+                    description: ラベル0のテキスト（最大5文字のUTF-8）
+                  '1':
+                    type: string
+                    description: ラベル1のテキスト（最大5文字のUTF-8）
+                  '2':
+                    type: string
+                    description: ラベル2のテキスト（最大5文字のUTF-8）
+                  '3':
+                    type: string
+                    description: ラベル3のテキスト（最大5文字のUTF-8）
+              example: "0=ラベル0&1=ラベル1&2=ラベル2&3=ラベル3"
+
+    put:
+      summary: ラベル更新
+      description: 1つ以上のラベル（0-3）を更新します。各ラベルは最大5文字のUTF-8文字を含めることができます。
+      parameters:
+        - name: '0'
+          in: query
+          required: false
+          description: ラベル0のテキスト
+          schema:
+            type: string
+            maxLength: 5
+            default: ラベル0
+        - name: '1'
+          in: query
+          required: false
+          description: ラベル1のテキスト
+          schema:
+            type: string
+            maxLength: 5
+            default: ラベル1
+        - name: '2'
+          in: query
+          required: false
+          description: ラベル2のテキスト
+          schema:
+            type: string
+            maxLength: 5
+            default: ラベル2
+        - name: '3'
+          in: query
+          required: false
+          description: ラベル3のテキスト
+          schema:
+            type: string
+            maxLength: 5
+            default: ラベル3
+      responses:
+        '200':
+          description: 正常系
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: success!
+        '400':
+          description: 無効なリクエスト
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                invalidArgsLength:
+                  value: invalid args length
+                  summary: 引数の数が正しくありません（4つである必要があります）
+                invalidKey:
+                  value: "invalid key: x"
+                  summary: 無効なラベルキー（0-3である必要があります）
+                valueTooLong:
+                  value: "value too long: verylongtext"
+                  summary: ラベル値が5文字のUTF-8を超えています
