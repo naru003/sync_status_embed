@@ -111,7 +111,7 @@ class ServerClient {
         }
 
         for (uint8_t i = 0; i < server.args(); i++) {
-          labelsPointer[server.argName(i).toInt()].setText(server.arg(i).c_str());
+          labelsPointer[server.argName(i).toInt()].setText(server.urlDecode(server.arg(i)).c_str());
         }
         server.send(200, "text/plain", "success!");
       });
