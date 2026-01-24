@@ -88,7 +88,6 @@ class ServerClient {
         String str = server.pathArg(0);
         if(str.toInt() < validateLedState){
           *ledStatePointer = str.toInt();
-          // ledState.draw();
           server.send(200, "text/plain", "success!");
         } else {
           server.send(400, "text/plain", "This operation is out of scope.");
