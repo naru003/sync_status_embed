@@ -22,7 +22,7 @@ class ServerClient {
   int utf8Length(const String& s) {
     int count = 0;
     for (uint16_t i = 0; i < s.length(); i++) {
-      // UTF-8 の先頭バイト判定
+      // UTF-8 の先頭バイトまたは単一バイト文字の判定（非継続バイト判定）
       if ((s[i] & 0xC0) != 0x80) {
         count++;
       }
