@@ -14,7 +14,7 @@ class Display {
     {BoxOffset::X[1], BoxOffset::Y[1]}
   };
 
-  void drawRBox(const RBox box) {
+  void drawRBox(const RBox& box) {
     u8g2.drawRBox(box.x, box.y, box.width, box.height, box.radius);
   }
 
