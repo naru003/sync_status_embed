@@ -27,7 +27,7 @@ class Display {
       u8g2.setFont(u8g2_font_b12_b_t_japanese3);
     }
 
-    void printLcd(int8_t ledState, Label labels[]){
+    void updateDisplay(int8_t ledState, Label labels[]){
       u8g2.clearBuffer();
       for(int8_t i=0; i<LabelOffset::LENGTH; i++) {
         if(bitRead(ledState, i)) {
