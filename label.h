@@ -23,6 +23,8 @@ class Label {
       text[i] = EEPROM.read(eepromAddr + i);
       if (text[i] == '\0') break;
     }
+    // Ensure buffer is always null-terminated even if EEPROM data is corrupted
+    text[TEXT_LEN - 1] = '\0';
   }
 
   void save() {
