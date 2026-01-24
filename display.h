@@ -4,7 +4,7 @@
 #include "types.h"
 #include "constants.h"
 
-#define DISPLAY_CONTRAST 128;
+#define DISPLAY_CONTRAST 128
 
 U8G2_SSD1309_128X64_NONAME2_F_HW_I2C u8g2(U8G2_R0, /* reset=*/U8X8_PIN_NONE, /* clock=*/ Pins::SCL, /* data=*/ Pins::SDA);
 
