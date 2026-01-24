@@ -31,8 +31,9 @@ void handle100ms() {
 void setup(void) {
   EEPROM.begin(512);
   for(int8_t i=0; i<LabelOffset::LENGTH; i++) {
-    String defaultText = "ラベル" + String(i+1);
-    labels[i].begin(defaultText.c_str());
+    char defaultText[16];
+    snprintf(defaultText, sizeof(defaultText), "ラベル%d", i + 1);
+    labels[i].begin(defaultText);
   }
   Serial.begin(115200);
   serverClient.setup();
