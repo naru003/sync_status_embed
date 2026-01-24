@@ -23,7 +23,7 @@ Display display;
 void handle100ms() {
   if (now - timer100ms > 100) {
     // 100ms単位で動く処理
-    display.printLcd(ledState, labels);
+    display.updateDisplay(ledState, labels);
     timer100ms = now;
   }
 }
