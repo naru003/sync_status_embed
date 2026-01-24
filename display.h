@@ -4,6 +4,8 @@
 #include "types.h"
 #include "constants.h"
 
+#define DISPLAY_CONTRAST 128;
+
 U8G2_SSD1309_128X64_NONAME2_F_HW_I2C u8g2(U8G2_R0, /* reset=*/U8X8_PIN_NONE, /* clock=*/ Pins::SCL, /* data=*/ Pins::SDA);
 
 class Display {
@@ -22,7 +24,7 @@ class Display {
     void setup(){
       u8g2.begin();
       u8g2.enableUTF8Print();
-      u8g2.setContrast(128);
+      u8g2.setContrast(DISPLAY_CONTRAST);
       u8g2.setFontMode(1);  // テキストの背景を透明に設定
       u8g2.setFont(u8g2_font_b12_b_t_japanese3);
     }
