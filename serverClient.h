@@ -97,6 +97,7 @@ class ServerClient {
       server.on(F("/labels"), HTTP_GET, [this]() {
         String response;
         for(uint8_t i = 0; i < LabelOffset::LENGTH; i++) {
+          if(i > 0) response += "&";
           response += String(i) + "=" + urlEncode(labelsPointer[i].getText());
         }
         server.send(200, "application/x-www-form-urlencoded", response);
