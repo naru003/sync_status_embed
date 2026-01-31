@@ -31,7 +31,8 @@ class ServerClient {
   }
 
   String validateArgs(ESP8266WebServer& server) {
-    if (server.args() != 4) return "invalid args length";
+    int args = server.args();
+    if (args < 1 || args > LabelOffset::LENGTH) return "invalid args length";
 
     for (uint8_t i = 0; i < server.args(); i++) {
       String key = server.argName(i);
