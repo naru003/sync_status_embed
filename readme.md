@@ -31,7 +31,7 @@ ESP8266を使用したWebサーバーベースのステータス表示システ�
    - `swagger viewer`で検索
    - 「Preview In Browser」にチェックを入れる
 3. Swagger UIでプレビュー
-   - `documents/swagger.yaml`を開く
+   - `documents/openapi.yaml`を開く
    - コマンドパレット（`Ctrl+Shift+P`）を開く
    - `Preview Swagger`を選択
    - ブラウザでSwagger UIが表示されます
