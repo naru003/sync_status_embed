@@ -82,6 +82,7 @@ curl -X PUT "http://syncStatusServer.local/labels?0=ラベル1&1=ラベル2&2=�
 1. Arduino IDEでボードのセットアップ
    1. <https://github.com/esp8266/Arduino>を参照
 2. ボード選択後、「ツール」を開き以下設定値を変更
+
   |       項目        |         設定値         |
   | ----------------- | ---------------------- |
   | Crystal Frequency | 26 MHz                 |
@@ -89,7 +90,8 @@ curl -X PUT "http://syncStatusServer.local/labels?0=ラベル1&1=ラベル2&2=�
   | Flash Frequency   | 80 MHz                 |
   | Flash Mode        | QIO(fast)              |
   | CPU Frequency     | 160 MHz                |
-3. 必要なライブラリをインストール
+
+4. 必要なライブラリをインストール
    - **U8g2**: OLEDディスプレイ制御用
      - ライブラリマネージャーで「U8g2」を検索してインストール
 
