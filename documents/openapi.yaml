@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Sync Status API
-  description: ESP8266デバイス上の同期ステータスLED状態とラベルを制御するAPI
+  description: ESP8266デバイス上のOLEDボックス表示状態とラベルを制御するAPI
   version: 1.0.0
 servers:
   - url: http://syncStatusServer.local
@@ -29,27 +29,27 @@ paths:
 
   /state:
     get:
-      summary: 現在のLED状態取得
-      description: 現在のLED状態値を返します
+      summary: 現在のボックス表示状態取得
+      description: 現在のボックス表示状態値を返します
       responses:
         '200':
-          description: Current LED state
+          description: Current box display state
           content:
             text/plain:
               schema:
                 type: integer
-                description: 現在のLED状態値
+                description: 現在のボックス表示状態値
                 example: 5
 
   /state/{value}:
     put:
-      summary: LED状態設定
-      description: LED状態を指定された値に設定します（16未満である必要があります）
+      summary: ボックス表示状態設定
+      description: ボックス表示状態を指定された値に設定します（16未満である必要があります）
       parameters:
         - name: value
           in: path
           required: true
-          description: 設定するLED状態値
+          description: 設定するボックス表示状態値
           schema:
             type: integer
             minimum: 0
