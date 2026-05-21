@@ -80,21 +80,16 @@ paths:
           content:
             application/x-www-form-urlencoded:
               schema:
-                type: object
-                properties:
-                  '0':
-                    type: string
-                    description: ラベル0のテキスト（最大5文字のUTF-8）
-                  '1':
-                    type: string
-                    description: ラベル1のテキスト（最大5文字のUTF-8）
-                  '2':
-                    type: string
-                    description: ラベル2のテキスト（最大5文字のUTF-8）
-                  '3':
-                    type: string
-                    description: ラベル3のテキスト（最大5文字のUTF-8）
-              example: "0=ラベル0&1=ラベル1&2=ラベル2&3=ラベル3"
+                type: string
+                description: |-
+                  `0=<text>&1=<text>&2=<text>&3=<text>` 形式の
+                  `application/x-www-form-urlencoded` 文字列です。
+
+                  - `0`: ラベル0のテキスト（最大5文字のUTF-8）
+                  - `1`: ラベル1のテキスト（最大5文字のUTF-8）
+                  - `2`: ラベル2のテキスト（最大5文字のUTF-8）
+                  - `3`: ラベル3のテキスト（最大5文字のUTF-8）
+                example: "0=ラベル1&1=ラベル2&2=ラベル3&3=ラベル4"
 
     put:
       summary: ラベル更新
