@@ -144,7 +144,7 @@ paths:
               examples:
                 invalidArgsLength:
                   value: invalid args length
-                  summary: 引数の数が正しくありません（4つである必要があります）
+                  summary: 引数の数が正しくありません（1〜4つである必要があります）
                 invalidKey:
                   value: "invalid key: x"
                   summary: 無効なラベルキー（0-3である必要があります）
