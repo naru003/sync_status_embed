@@ -19,14 +19,14 @@
 **完成品のイメージ**
 
 **詳細**
-[`variant/bit-led` ブランチの README](#)
+[`variant/bit-led` ブランチの README](../..//tree/variant/bit-led)
 
 ## OLED版
 
 **完成品のイメージ**
 
 **詳細**
-[`variant/smart-oled` ブランチの README](#)
+[`variant/smart-oled` ブランチの README](../..//tree/variant/smart-oled)
 
 ---
 
@@ -37,3 +37,22 @@
 - HOSTNAME: `syncStatusServer` / mDNS: `syncStatusServer.local`
 
 Arduino IDE のセットアップについては [esp8266/Arduino](https://github.com/esp8266/Arduino) を参照してください。
+
+## 注意事項
+
+本リポジトリは DMZ 内のローカルネットワーク環境での個人運用を前提として設計されており、認証・認可の実装は含まれていません。  
+外部ネットワークへの公開や、セキュリティが求められる環境での使用は推奨しません。
+
+---
+
+## ライセンス
+
+Copyright (c) 2026 naru003
+
+本プロジェクトは [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/) の下で公開されています。
+
+- **個人利用・非営利目的での使用・改変・再配布は許可**されています。
+- **商用利用は禁止**されています。
+- 再配布・改変の際は原著作者のクレジットを表示してください。
+
+詳細は [LICENSE](./LICENSE) ファイルを参照してください。
