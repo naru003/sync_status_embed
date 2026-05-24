@@ -22,7 +22,8 @@
 - **完成品のイメージ**
 
 - **詳細**
-  [README](../..//tree/variant/bit-led)
+
+[README](../..//tree/variant/bit-led)
 
 ## OLED版
 
@@ -33,7 +34,8 @@
 | ![front-side](images/smart-oled/front-side.jpg) | ![active](images/smart-oled/active.jpg) | ![back-side](images/smart-oled/back-side.jpg) |
 
 - **詳細**
-  [dREADME](../..//tree/variant/smart-oled)
+
+[README](../..//tree/variant/smart-oled)
 
 ---
 
