@@ -19,17 +19,21 @@
 
 ## LED版
 
-**完成品のイメージ**
+- **完成品のイメージ**
 
-**詳細**
-[README](../..//tree/variant/bit-led)
+- **詳細**
+  [README](../..//tree/variant/bit-led)
 
 ## OLED版
 
-**完成品のイメージ**
+- **完成品のイメージ**
 
-**詳細**
-[dREADME](../..//tree/variant/smart-oled)
+| 画面側                                          | 動作中                                  | 背面側                                        |
+| ----------------------------------------------- | --------------------------------------- | --------------------------------------------- |
+| ![front-side](images/smart-oled/front-side.jpg) | ![active](images/smart-oled/active.jpg) | ![back-side](images/smart-oled/back-side.jpg) |
+
+- **詳細**
+  [dREADME](../..//tree/variant/smart-oled)
 
 ---
 
