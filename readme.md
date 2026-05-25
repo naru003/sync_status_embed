@@ -21,6 +21,10 @@
 
 - **完成品のイメージ**
 
+| 画面側                                       | 動作中                               | 背面側                                     |
+| -------------------------------------------- | ------------------------------------ | ------------------------------------------ |
+| ![front-side](images/bit-led/front-side.jpg) | ![active](images/bit-led/active.jpg) | ![back-side](images/bit-led/back-side.jpg) |
+
 - **詳細**
 
   [README](../..//tree/variant/bit-led#readme)
