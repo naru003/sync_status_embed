@@ -23,7 +23,7 @@
 
 - **詳細**
 
-  [README](../..//tree/variant/bit-led)
+  [README](../..//tree/variant/bit-led#readme)
 
 ## OLED版
 
@@ -35,7 +35,7 @@
 
 - **詳細**
 
-  [README](../..//tree/variant/smart-oled)
+  [README](../..//tree/variant/smart-oled#readme)
 
 ---
 
